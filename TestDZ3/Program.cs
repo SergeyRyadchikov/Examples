@@ -1,16 +1,61 @@
-﻿Console.Write("Введите пятизначное число: ");
-int N = Convert.ToInt32(Console.ReadLine());
-
-if (N > 9999 && N < 100000)
+﻿
+int[] CreatingArrayFromString(string EnteringArray, char value)
 {
-    if (N / 10000 == N % 10)
+    int count = 1;
+    for (int iStr = 0; iStr < EnteringArray.Length; iStr++)
     {
-        if (N / 1000 % 10 == N % 100 / 10)
+        if (EnteringArray[iStr] == value)
         {
-            Console.Write("Является палиндромом");
+            count++;
         }
-        else Console.Write("Не является палиндромом");
     }
-    else Console.Write("Не является палиндромом");
+
+    Console.Write("Размерность массива: \t" + (count));
+    Console.WriteLine();
+
+    int[] arr = new int[count];
+    int iArr = 0;
+    string save = string.Empty;
+
+    for (int iStr = 0; iStr < EnteringArray.Length; iStr++)
+    {
+        if (iStr != EnteringArray.Length - 1)
+        {
+            while (EnteringArray[iStr] != value)
+            {
+                save = save + $"{EnteringArray[iStr]}";
+                iStr++;
+                if (iStr == EnteringArray.Length) break;
+            }
+            arr[iArr] = int.Parse(save);
+            iArr++;
+            save = string.Empty;
+        }
+        else
+        {
+            save = save + $"{EnteringArray[iStr]}";
+            arr[iArr] = int.Parse(save);
+        }
+    }
+    return arr;
 }
-else Console.Write("Ваше число не является пятизначным");
+
+void PrintArray(int[] coll)
+{
+    int i_col = 0;
+    while (i_col < coll.Length)
+    {
+        if (i_col != coll.Length - 1)
+        {
+            Console.Write(coll[i_col] + ", ");
+        }
+        else Console.Write(coll[i_col]);
+        i_col++;
+    }
+}
+
+
+Console.Write("Введите массив: ");
+string Entering = Console.ReadLine();
+int[] mass = CreatingArrayFromString(Entering, ' ');
+PrintArray(mass);
