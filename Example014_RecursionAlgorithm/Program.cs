@@ -113,10 +113,10 @@ void PrintImage(int[,] image)
 }
 
 
-// PrintImage(pic);
-// Console.WriteLine();
-// FillImage(2, 12);
-// PrintImage(pic);
+PrintImage(pic);
+Console.WriteLine();
+FillImage(9, 10);
+PrintImage(pic);
 
 
 
@@ -142,13 +142,13 @@ for (int i = 0; i < 40; i++)
 
 // Рекурсия с ичслами фибоначи
 // мы помним, что: Первое число == 1, второе число == 1, пожтому в функции прописываем это условие
-int Fibonacci(int i)
-{
-    if (i == 1 || i == 2) return 1;
-    else return Fibonacci(i - 1) + Fibonacci(i - 2);
-}
+// int Fibonacci(int i)
+// {
+//     if (i == 1 || i == 2) return 1;
+//     else return Fibonacci(i - 1) + Fibonacci(i - 2);
+// }
 
-for (int n = 1; n < 40; n++)
-{
-    Console.WriteLine($"f({n}) = {Fibonacci(n)}");
-}
+// for (int n = 1; n < 40; n++)
+// {
+//     Console.WriteLine($"f({n}) = {Fibonacci(n)}");
+// }
