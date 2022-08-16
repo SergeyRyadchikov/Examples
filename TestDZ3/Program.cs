@@ -1,91 +1,141 @@
-﻿
-// int[] CreatingArrayFromString(string EnteringArray, char value)
+﻿// // Задача 50. Напишите программу, которая на вход принимает позиции элемента либо значение элемента в двумерном
+// // массиве, и возвращает значение либо индекс этого элемента или же указание, что такого элемента нет.
+// // Например, задан массив:
+// // 1 4 7 2
+// // 5 9 2 3
+// // 8 4 2 4
+
+// // 17 -> такого числа в массиве нет
+// // 4 -> такой элемент есть и его индекс 0, 1 (идеально было б найти все вхождения этого элемента)
+// // 2, 3 -> такой элемент есть и равен 4
+// // 5, 5 -> такой элемент отсутствует
+
+// void PrintMatrix(int[,] array)
 // {
-//     int count = 1;
-//     for (int iStr = 0; iStr < EnteringArray.Length; iStr++)
+//     for (int i = 0; i < array.GetLength(0); i++)
 //     {
-//         if (EnteringArray[iStr] == value)
+//         for (int j = 0; j < array.GetLength(1); j++)
 //         {
-//             count++;
+//             Console.Write(array[i, j] + "\t");
 //         }
+//         Console.WriteLine();
 //     }
+// }
 
-//     Console.Write("Размерность массива: \t" + (count));
-//     Console.WriteLine();
-
-//     int[] arr = new int[count];
-//     int iArr = 0;
-//     string save = string.Empty;
-
-//     for (int iStr = 0; iStr < EnteringArray.Length; iStr++)
+// void FillMatrix(int[,] array)
+// {
+//     for (int i = 0; i < array.GetLength(0); i++)
 //     {
-//         if (iStr != EnteringArray.Length - 1)
+//         for (int j = 0; j < array.GetLength(1); j++)
 //         {
-//             while (EnteringArray[iStr] != value)
 //             {
-//                 save = save + $"{EnteringArray[iStr]}";
-//                 iStr++;
-//                 if (iStr == EnteringArray.Length) break;
+//                 array[i, j] = new Random().Next(1, 10);
 //             }
-//             arr[iArr] = int.Parse(save);
-//             iArr++;
-//             save = string.Empty;
-//         }
-//         else
-//         {
-//             save = save + $"{EnteringArray[iStr]}";
-//             arr[iArr] = int.Parse(save);
 //         }
 //     }
-//     return arr;
 // }
 
-// void PrintArray(int[] array)
+// void SeachingElementsOrIndex(int[,] matrix, string[] massive)
 // {
-//     for (int i = 0; i < array.Length; i++)
+//     if (massive.Length == 1)
 //     {
-//         if (i < array.Length - 1) Console.Write(array[i] + "; ");
-//         else
+//         int count = 0;
+//         for (int i = 0; i < matrix.GetLength(0); i++)
 //         {
-//             Console.Write(array[i]);
-//             Console.WriteLine();
+//             for (int j = 0; j < matrix.GetLength(1); j++)
+//             {
+//                 if (matrix[i, j] == Convert.ToInt32(massive[0]))
+//                 {
+//                     Console.WriteLine($"Элемент найден на позиции {i}, {j}");
+//                     count++;
+//                 }
+//             }
 //         }
+//         if (count == 0) Console.WriteLine("Такого элемента не найдено");
 //     }
-// }
-
-// int CountPositive(int[] array)
-// {
-//     int count = 0;
-//     for(int i=0; i<array.Length; i++)
+//     else if (massive.Length == 2)
 //     {
-//         if (array[i]>0) count ++;
-//         else continue;
+//         if (Convert.ToInt32(massive[0]) > matrix.GetLength(0) ||
+//              Convert.ToInt32(massive[1]) > matrix.GetLength(1))
+//         {
+//             Console.WriteLine("Нет элемента с таким индексом");
+//         }
+//         Console.WriteLine("Элемент на указанной позиции = " +
+//                           $"{matrix[Convert.ToInt32(massive[0]), Convert.ToInt32(massive[1])]}");
 //     }
-//     return count;
+//     else Console.WriteLine("Введите одно или два числа через запятую");
 // }
 
+// Console.WriteLine("Введите размерность массива через запятую: ");
+// string size = Console.ReadLine();
+// string[] array = size.Split(",");
+// int[,] massive = new int[Convert.ToInt32(array[0]), Convert.ToInt32(array[1])];
 
-// Console.Write("Введите массив через запятую: ");
-// string Entering = Console.ReadLine();
-// int[] mass = CreatingArrayFromString(Entering, ',');
-// PrintArray(mass);
+// FillMatrix(massive);
+// PrintMatrix(massive);
 // Console.WriteLine();
-// Console.Write($"Количество положительных чисел = {CountPositive(mass)}");
+
+// Console.WriteLine("Введите значение или индекс элемента, который нужно найти: ");
+// string value = Console.ReadLine();
+// string[] mass = value.Split(",");
+// SeachingElementsOrIndex(massive, mass);
 
 
+// Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+// Например, задан массив:
+// 1 4 7 2
+// 5 9 2 3
+// 8 4 2 4
+// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
-// Console.WriteLine("введите k1, b1, k2, b2 через запятую");
-// string values = Console.ReadLine();
-// string[] array = values.Split(',');
-// double[] arr = new double[] { Convert.ToInt32(array[0]), Convert.ToInt32(array[1]),
-//                              Convert.ToInt32(array[2]), Convert.ToInt32(array[3]) };
-// double x;
-// double y;
 
-// if (arr[0] == arr[2]) Console.WriteLine("Прямые параллельны и точки пересечения не имеют");
-// else
-// {
-//     x = (arr[3] - arr[1]) / (arr[0] - arr[2]);
-//     y = (arr[2] * x) + arr[3];
-//     Console.Write($"Прямые пересекаются в точке с координатами x = {Math.Round(x, 2)}; y = {Math.Round(y, 2)}");
-// }
+void PrintMatrix(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+
+            Console.Write(array[i, j] + "\t");
+
+        }
+        Console.WriteLine();
+    }
+}
+
+void FillMatrix(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            {
+                array[i, j] = new Random().Next(1, 10);
+            }
+        }
+    }
+}
+
+void ArithmeticMeanOfColumns(int[,] mass)
+{
+    double res = 0;
+    for (int j = 0; j < mass.GetLength(1); j++)
+    {
+        for (int i = 0; i < mass.GetLength(0); i++)
+        {
+            res += mass[i, j];
+        }
+        res = res / mass.GetLength(0);
+        Console.WriteLine($"Среднее арифметическое стобца {j + 1} = {Math.Round(res, 1)}");
+        res = 0;
+    }
+}
+
+Console.WriteLine("Введите размерность массива через запятую: ");
+string size = Console.ReadLine();
+string[] mass = size.Split(",");
+int[,] massive = new int[Convert.ToInt32(mass[0]), Convert.ToInt32(mass[1])];
+
+FillMatrix(massive);
+PrintMatrix(massive);
+ArithmeticMeanOfColumns(massive);
